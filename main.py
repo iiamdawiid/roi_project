@@ -1,4 +1,4 @@
-# create a program that will calculate the Return on Investment (ROI) for a rental property\
+# create a program that will calculate the Return on Investment (ROI) for a rental property
 # user inputs - monthly_income, monthly_expenses
 # monthly_cashflow variable = monthly_income - monthly_expenses
 # ROI - user input -> total_investment --- figure out annual cash flow -> monthly_cashflow * 12
@@ -7,13 +7,12 @@
 class ReturnOnInvestment():
 
     def __init__(self, address):
-        self.address = address
+        self.address = address.title()
 
     def run(self):
         # run() will start the program and call the other functions
         print(f"CALCULATING ROI FOR ---> {self.address.upper()}\n")
         self.get_monthly_income()
-
 
     def get_monthly_income(self):
         # will ask user to input monthly income and store it in monthly_income
@@ -44,7 +43,7 @@ class ReturnOnInvestment():
             self.total_investment = input("Enter amount in $: ")
         self.annual_cashflow = int(self.monthly_cashflow) * 12
         self.roi = (int(self.annual_cashflow) / int(self.total_investment)) * 100
-        self.roi_storage()
+        store_info(self.address, self.roi)
         self.print_result()
 
     def print_result(self):
@@ -56,7 +55,20 @@ class ReturnOnInvestment():
         print(f"ROI: {round(self.roi, 2)} %")
         print("".center(50, '-'))
 
-    
+roi_storage = {}
+
+def store_info(address, roi):
+    # will store property address and calculated ROI
+    roi_storage[address] = (round(roi, 2))
+
+def print_stored_info():
+    print("")
+    print("CALCULATED ROI'S".center(50, '-'))
+    for key, value in roi_storage.items():
+        print(f"{key} : {value} %")
+    print("")
+
+
 
 # main
 print("CALCULATION OF RENTAL INCOME".center(50, '-'))
@@ -65,17 +77,24 @@ while True:
     print("".center(50, '-'))
     p = ReturnOnInvestment(property_address)
     p.run()
-    run_again = input("Calculate another property or print stored properties? (Y/N/P): ")
+    run_again = input("Calculate, print ROI's, or quit? (C/P/Q): ")
     run_again = run_again.upper()
     # found out checking for membership in set is faster than checking in list especially if list is large in size
-    while run_again not in {'Y', 'N', 'P'}:
+    while run_again not in {'C', 'P', 'Q'}:
         print(">>> INVALID INPUT <<<")
-        run_again = input("Enter 'Y' or 'N': ")
-    if run_again == 'Y':
+        run_again = input("Enter 'C', 'P', or 'Q': ")
+    if run_again == 'C':
         continue
-    elif run_again == 'N':
-        break
+    elif run_again == 'P':
+        print_stored_info()
+        user_input = input("Calculate another property 'C' or quit 'Q'?: ")
+        user_input = user_input.upper()
+        while user_input not in {'C', 'Q'}:
+            print(">>> INVALID INPUT <<<")
+            user_input = input("Enter 'C' or 'Q': ")
+        if user_input == 'C':
+            continue
+        else:
+            break
     else:
-        p.print_roi_storage()
-
-        # FINISH DICTIONARY FOR STORING ADDRESS AND ROI VALUE
+        break
