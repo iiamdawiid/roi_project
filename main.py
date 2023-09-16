@@ -15,7 +15,7 @@ class ReturnOnInvestment():
         self.get_monthly_income()
 
     def get_monthly_income(self):
-        # will ask user to input monthly income and store it in monthly_income
+        # ask user to input monthly income and store it in monthly_income
         self.monthly_income = input("Enter property monthly income: ")
         while self.monthly_income.isalpha():
             print(">>> INVALID INPUT <<<")
@@ -23,7 +23,7 @@ class ReturnOnInvestment():
         self.get_monthly_expenses()
 
     def get_monthly_expenses(self):
-        # will ask user for monthly expenses and store it in monthly_expenses
+        # ask user for monthly expenses and store it in monthly_expenses
         self.monthly_expenses = input("Enter property monthly expenses: ")
         while self.monthly_expenses.isalpha():
             print(">>> INVALID INPUT <<<")
@@ -31,12 +31,12 @@ class ReturnOnInvestment():
         self.monthly_cashflow()
 
     def monthly_cashflow(self):
-        # will calculate the monthly cashflow by doing monthly_income - monthly_expenses
+        # calculate the monthly cashflow by doing monthly_income - monthly_expenses
         self.monthly_cashflow = int(self.monthly_income) - int(self.monthly_expenses)
         self.calc_roi()
 
     def calc_roi(self):
-        # will calculate the total ROI and print it for the user to see
+        # calculate the total ROI and print it for the user to see
         self.total_investment = input("Enter property total investment: ")
         while self.total_investment.isalpha():
             print(">>> INVALID INPUT <<<")
@@ -58,10 +58,11 @@ class ReturnOnInvestment():
 roi_storage = {}
 
 def store_info(address, roi):
-    # will store property address and calculated ROI
+    # store property address and calculated ROI
     roi_storage[address] = (round(roi, 2))
 
 def print_stored_info():
+    # print stored address and ROI
     print("")
     print("CALCULATED ROI'S".center(50, '-'))
     for key, value in roi_storage.items():
